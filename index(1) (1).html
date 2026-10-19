@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dayat Friends — Galeri Kenangan</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d32;--panel2:#1b2741;--text:#f4f7ff;--muted:#a9b5d0;--accent:#8b5cf6;--accent2:#22d3ee;--line:#2d3a59;--danger:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#24325b 0,transparent 38%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;font-weight:700;color:white;background:linear-gradient(135deg,var(--accent),#6366f1)}button:hover{filter:brightness(1.1)}button.secondary{background:#293653;border:1px solid var(--line)}button.danger{background:#a8324a}button:disabled{opacity:.4;cursor:not-allowed}
+header{padding:22px max(16px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #293653;background:#0b1020dd;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px}.brand h1{font-size:18px;margin:0}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+main{max-width:1120px;margin:auto;padding:24px 16px 60px}.hero{padding:26px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(120deg,#1d2947dd,#171d34ee);display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.hero h2{font-size:clamp(24px,5vw,38px);line-height:1.1;margin:0 0 10px}.hero p{color:var(--muted);margin:0;max-width:600px}.pill{display:inline-flex;gap:7px;align-items:center;border:1px solid #3b4a6d;border-radius:999px;padding:7px 11px;color:#d8e3ff;font-size:12px;margin-bottom:12px}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#0e162a;border:1px solid var(--line);padding:12px 15px;border-radius:14px;min-width:95px}.stat strong{display:block;font-size:21px}.stat span{font-size:12px;color:var(--muted)}
+.section{margin-top:28px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}.section h3{font-size:21px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}.members{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.member{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;gap:12px;align-items:center;min-width:0}.avatar{width:60px;height:60px;border-radius:18px;object-fit:cover;background:#2b3655;flex-shrink:0;display:grid;place-items:center;font-size:26px}.member-info{min-width:0;flex:1}.member-info strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.member-info small{color:var(--muted)}.member-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.member-actions button{padding:7px 9px;font-size:12px}.member.selected{border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2) inset}.tag{font-size:10px;color:#b9f6ff;border:1px solid #286175;border-radius:999px;padding:3px 7px;display:inline-block;margin-top:4px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px}.upload-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.upload-row input[type=file]{max-width:100%;color:var(--muted)}.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:13px;color:#d4def4}.field input,.field textarea,.field select,input[type=text],input[type=password]{width:100%;border:1px solid #354362;background:#0c1427;color:var(--text);border-radius:11px;padding:11px 12px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--accent2)}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.photo{overflow:hidden;border-radius:16px;background:var(--panel);border:1px solid var(--line)}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0c1427}.photo-body{padding:12px}.photo-body strong{display:block;overflow-wrap:anywhere}.photo-body p{color:var(--muted);font-size:12px;margin:5px 0}.photo-actions{display:flex;gap:7px;margin-top:10px}.photo-actions button{font-size:12px;padding:7px 10px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #435071;border-radius:16px;grid-column:1/-1}
+.game-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}.game-info{display:flex;flex-direction:column;justify-content:center;gap:12px}.turn{font-weight:800;font-size:18px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:360px;width:100%;margin:auto}.cell{aspect-ratio:1;background:#0d162b;border:1px solid #344361;border-radius:16px;font-size:clamp(30px,7vw,54px);font-weight:900;color:#9eeaf4;display:grid;place-items:center}.cell.x{color:#a78bfa}.cell.o{color:#67e8f9}.fineprint{font-size:12px;color:var(--muted);line-height:1.5;margin-top:18px}.overlay{position:fixed;inset:0;background:#050814dd;display:grid;place-items:center;padding:16px;z-index:20}.modal{width:min(440px,100%);background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 24px 80px #0008}.modal h2{margin:0 0 8px}.modal p{color:var(--muted);font-size:13px}.modal .field{margin:14px 0}.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.hidden{display:none!important}.notice{padding:11px 13px;border:1px solid #3a5074;background:#111d35;border-radius:12px;color:#d8e3ff;font-size:13px;margin:12px 0}
+@media(max-width:760px){.members,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{align-items:flex-start;flex-direction:column}.game-wrap{grid-template-columns:1fr}.brand p{display:none}}
+@media(max-width:480px){.members,.gallery{grid-template-columns:1fr}.member{padding:13px}.header-actions button{padding:8px 10px;font-size:12px}.hero{padding:20px}main{padding-top:16px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">✦</div><div><h1>Dayat Friends</h1><p>Tempat cerita dan kenangan kita</p></div></div>
+ <div class="header-actions"><span id="roleBadge" class="pill" style="margin:0">Mode tamu</span><button class="secondary" id="loginBtn">Login Owner</button><button class="secondary hidden" id="logoutBtn">Keluar</button></div>
+</header>
+<main>
+ <section class="hero">
+  <div><div class="pill">✧ FRIENDS FOREVER · 9 ANGGOTA</div><h2>Kenangan kecil,<br>cerita besar.</h2><p>Kumpulkan foto, kenali setiap anggota, dan main bareng di satu tempat.</p></div>
+  <div class="stats"><div class="stat"><strong id="memberCount">9</strong><span>Anggota</span></div><div class="stat"><strong id="photoCount">0</strong><span>Foto kenangan</span></div><div class="stat"><strong>1</strong><span>Grup</span></div></div>
+ </section>
+ <section class="section">
+  <div class="section-head"><div><h3>👥 Anggota grup</h3><div class="sub">Pilih anggota untuk menandai foto yang kamu unggah.</div></div><button id="addMemberBtn" class="hidden">＋ Tambah anggota</button></div>
+  <div id="members" class="members"></div>
+ </section>
+ <section class="section">
+  <div class="section-head"><div><h3>📸 Galeri kenangan</h3><div class="sub">Unggah foto bersama dan simpan ceritanya.</div></div></div>
+  <div class="panel">
+   <div class="field"><label for="photoCaption">Cerita / keterangan foto</label><input id="photoCaption" type="text" maxlength="120" placeholder="Contoh: Nongkrong hari Minggu..."></div>
+   <div class="upload-row"><input id="photoInput" type="file" accept="image/*" multiple><button id="uploadBtn">Unggah foto</button></div>
+   <div class="sub" style="margin-top:9px">Foto disimpan di browser perangkat ini. Pilih foto berukuran kecil agar penyimpanan tidak cepat penuh.</div>
+  </div>
+  <div id="gallery" class="gallery" style="margin-top:14px"></div>
+ </section>
+ <section class="section">
+  <div class="section-head"><div><h3>🎮 Mini game: Tic-Tac-Toe</h3><div class="sub">Main X lawan O bergantian di satu perangkat.</div></div></div>
+  <div class="panel game-wrap">
+   <div class="board" id="board" aria-label="Papan Tic-Tac-Toe"></div>
+   <div class="game-info"><div class="pill" style="width:max-content">2 PEMAIN · 3 × 3</div><div id="gameStatus" class="turn">Giliran: X</div><div class="sub">Susun tiga simbol sejajar secara mendatar, tegak, atau diagonal untuk menang.</div><div><button id="resetGame">Main lagi</button></div></div>
+  </div>
+ </section>
+ <p class="fineprint">Catatan penting: versi satu file ini menyimpan data secara lokal di browser, bukan di server. Foto, nama, dan perubahan anggota tidak otomatis muncul di perangkat teman lain. Login Owner di versi demo ini cocok untuk prototipe, bukan keamanan website publik; untuk perlindungan sungguhan dibutuhkan backend dan autentikasi server.</p>
+</main>
+<div id="loginOverlay" class="overlay hidden">
+ <div class="modal"><h2>🔐 Login Owner</h2><p>Masuk untuk mengubah nama/foto profil anggota dan menghapus foto galeri.</p>
+  <form id="loginForm"><div class="field"><label for="ownerUsername">Username</label><input id="ownerUsername" autocomplete="username" required placeholder="Username owner"></div><div class="field"><label for="ownerPassword">Password</label><input id="ownerPassword" type="password" autocomplete="current-password" required placeholder="Password owner"></div><div id="loginError" class="sub" style="color:#fda4af"></div><div class="modal-actions"><button type="submit">Masuk</button><button type="button" class="secondary" id="cancelLogin">Batal</button></div></form>
+ </div>
+</div>
+<div id="editOverlay" class="overlay hidden">
+ <div class="modal"><h2 id="editTitle">Edit anggota</h2><p>Ubah nama atau foto profil anggota ini.</p>
+  <form id="editForm"><input type="hidden" id="editMemberId"><div class="field"><label for="editName">Nama anggota</label><input id="editName" maxlength="40" required></div><div class="field"><label for="editAvatar">Foto profil (opsional)</label><input id="editAvatar" type="file" accept="image/*"></div><div class="modal-actions"><button type="submit">Simpan perubahan</button><button type="button" class="secondary" id="cancelEdit">Batal</button></div></form>
+ </div>
+</div>
+<script>
+(() => {
+ const OWNER_USER = 'yatzzking';
+ const OWNER_PASS = 'yatzz889'; // Demo lokal saja; jangan gunakan sebagai keamanan untuk situs publik.
+ const $ = id => document.getElementById(id);
+ const KEY = 'dayatFriends_v1';
+ let isOwner = false, selectedMember = 'm1';
+ const defaultMembers = Array.from({length:9},(_,i)=>({id:'m'+(i+1),name:i===0?'Dayat':'Anggota '+(i+1),avatar:'',owner:i===0}));
+ let data = loadData();
+ function loadData(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.members)&&Array.isArray(x.photos))return x;}catch(e){}return {members:defaultMembers,photos:[]};}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){alert('Penyimpanan browser penuh. Hapus beberapa foto atau gunakan foto berukuran lebih kecil.');}}
+ function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ function initials(name){return escapeHTML((name||'?').trim().slice(0,1).toUpperCase()||'?');}
+ function renderMembers(){
+  $('members').innerHTML=data.members.map(m=>`<article class="member ${selectedMember===m.id?'selected':''}">
+   ${m.avatar?`<img class="avatar" src="${m.avatar}" alt="Foto ${escapeHTML(m.name)}">`:`<div class="avatar">${initials(m.name)}</div>`}
+   <div class="member-info"><strong>${escapeHTML(m.name)}</strong><small>${m.owner?'Pemilik grup':'Anggota grup'}</small>${selectedMember===m.id?'<div class="tag">Dipilih untuk foto</div>':''}
+   <div class="member-actions"><button class="secondary chooseMember" data-id="${m.id}">Pilih</button>${isOwner?`<button class="secondary editMember" data-id="${m.id}">Edit</button>`:''}</div></div></article>`).join('');
+  document.querySelectorAll('.chooseMember').forEach(b=>b.onclick=()=>{selectedMember=b.dataset.id;renderMembers();});
+  document.querySelectorAll('.editMember').forEach(b=>b.onclick=()=>openEdit(b.dataset.id));
+  $('memberCount').textContent=data.members.length;
+ }
+ function renderGallery(){
+  $('photoCount').textContent=data.photos.length;
+  if(!data.photos.length){$('gallery').innerHTML='<div class="empty">Belum ada foto kenangan. Unggah foto pertama grup kalian! 📷</div>';return;}
+  $('gallery').innerHTML=[...data.photos].reverse().map(p=>{const m=data.members.find(x=>x.id===p.memberId);return `<article class="photo"><img src="${p.src}" alt="${escapeHTML(p.caption||'Foto kenangan')}"><div class="photo-body"><strong>${escapeHTML(p.caption||'Kenangan bersama')}</strong><p>👤 ${escapeHTML(m?m.name:'Anggota')} · ${escapeHTML(p.date||'')}</p>${isOwner?`<div class="photo-actions"><button class="danger deletePhoto" data-id="${p.id}">Hapus foto</button></div>`:''}</div></article>`;}).join('');
+  document.querySelectorAll('.deletePhoto').forEach(b=>b.onclick=()=>{if(!isOwner){alert('Hanya Owner yang dapat menghapus foto.');return;}if(confirm('Yakin ingin menghapus foto ini?')){data.photos=data.photos.filter(p=>p.id!==b.dataset.id);save();renderGallery();}});
+ }
+ function updateAuth(){ $('roleBadge').textContent=isOwner?'👑 Owner aktif':'Mode tamu';$('loginBtn').classList.toggle('hidden',isOwner);$('logoutBtn').classList.toggle('hidden',!isOwner);$('addMemberBtn').classList.toggle('hidden',!isOwner);renderMembers();renderGallery(); }
+ $('loginBtn').onclick=()=>{$('loginOverlay').classList.remove('hidden');$('ownerUsername').focus();};
+ $('cancelLogin').onclick=()=>{$('loginOverlay').classList.add('hidden');$('loginError').textContent='';};
+ $('loginForm').onsubmit=e=>{e.preventDefault();if($('ownerUsername').value.trim()===OWNER_USER&&$('ownerPassword').value===OWNER_PASS){isOwner=true;$('loginOverlay').classList.add('hidden');$('loginForm').reset();$('loginError').textContent='';updateAuth();}else{$('loginError').textContent='Username atau password salah.';}};
+ $('logoutBtn').onclick=()=>{isOwner=false;updateAuth();};
+ function openEdit(id){if(!isOwner)return;const m=data.members.find(x=>x.id===id);if(!m)return;$('editMemberId').value=id;$('editName').value=m.name;$('editAvatar').value='';$('editOverlay').classList.remove('hidden');}
+ $('cancelEdit').onclick=()=>$('editOverlay').classList.add('hidden');
+ function readImage(file,maxSize=1000){return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith('image/'))return reject(new Error('Pilih file gambar.'));const r=new FileReader();r.onerror=reject;r.onload=()=>{const img=new Image();img.onerror=reject;img.onload=()=>{const scale=Math.min(1,maxSize/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.82));};img.src=r.result;};r.readAsDataURL(file);});}
+ $('editForm').onsubmit=async e=>{e.preventDefault();if(!isOwner)return;const m=data.members.find(x=>x.id===$('editMemberId').value);if(!m)return;m.name=$('editName').value.trim();const file=$('editAvatar').files[0];if(file){try{m.avatar=await readImage(file,400);}catch(err){alert('Foto profil tidak bisa dibaca.');return;}}save();$('editOverlay').classList.add('hidden');renderMembers();renderGallery();};
+ $('addMemberBtn').onclick=()=>{if(!isOwner)return;const name=prompt('Nama anggota baru:');if(!name||!name.trim())return;data.members.push({id:'m'+Date.now(),name:name.trim().slice(0,40),avatar:'',owner:false});save();renderMembers();};
+ $('uploadBtn').onclick=async()=>{const files=[...$('photoInput').files];if(!files.length){alert('Pilih minimal satu foto terlebih dahulu.');return;}const caption=$('photoCaption').value.trim();$('uploadBtn').disabled=true;$('uploadBtn').textContent='Mengunggah...';try{for(const file of files){const src=await readImage(file,1200);data.photos.push({id:'p'+Date.now()+Math.random().toString(16).slice(2),src,caption,memberId:selectedMember,date:new Date().toLocaleDateString('id-ID')});}save();$('photoInput').value='';$('photoCaption').value='';renderGallery();}catch(e){alert('Gagal memproses foto. Coba gambar lain yang lebih kecil.');}finally{$('uploadBtn').disabled=false;$('uploadBtn').textContent='Unggah foto';}};
+ let board=Array(9).fill(''),turn='X',finished=false;
+ const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+ function renderBoard(){ $('board').innerHTML=board.map((v,i)=>`<button class="cell ${v==='X'?'x':v==='O'?'o':''}" data-i="${i}" aria-label="Kotak ${i+1}">${v}</button>`).join('');document.querySelectorAll('.cell').forEach(b=>b.onclick=()=>play(+b.dataset.i));$('gameStatus').textContent=finished?$('gameStatus').textContent:'Giliran: '+turn;}
+ function play(i){if(finished||board[i])return;board[i]=turn;const win=wins.find(line=>line.every(n=>board[n]===turn));if(win){finished=true;$('gameStatus').textContent='🎉 Pemain '+turn+' menang!';}else if(board.every(Boolean)){finished=true;$('gameStatus').textContent='Seri! Coba lagi.';}else{turn=turn==='X'?'O':'X';$('gameStatus').textContent='Giliran: '+turn;}renderBoard();}
+ $('resetGame').onclick=()=>{board=Array(9).fill('');turn='X';finished=false;$('gameStatus').textContent='Giliran: X';renderBoard();};
+ renderBoard();updateAuth();
+})();
+</script>
+</body>
+</html>
